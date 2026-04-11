@@ -1,5 +1,7 @@
 import React from 'react';
 import SearchBar from './components/SearchBar.jsx';
+import LoadingSpinner from './components/LoadingSpinner.jsx';
+import TemperatureToggle from './components/TemperatureToggle.jsx';
 
 function App() {
   return (
@@ -33,6 +35,9 @@ function App() {
                 <LoadingSpinner/>
                 <p className='text-white/80 text-center mt-4 font-medium '>Fetching latest weather data.....</p>
               </div>
+            </div>
+            <div className='max-w-2xl mx-auto'>
+
             </div>
           </div>
 
