@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './components/SearchBar.jsx';
 import LoadingSpinner from './components/LoadingSpinner.jsx';
 import TemperatureToggle from './components/TemperatureToggle.jsx';
+import ErrorMessage from './components/ErrorMessage.jsx';
 
 function App() {
   return (
@@ -37,7 +38,11 @@ function App() {
               </div>
             </div>
             <div className='max-w-2xl mx-auto'>
+                <ErrorMessage/>
+            </div>
 
+            <div className='grid grid-cols-1 xl:grid-cols-3 gap-8'>
+              <div className='xl:col-span-2 '></div>
             </div>
           </div>
 
