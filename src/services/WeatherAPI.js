@@ -1,8 +1,4 @@
 import {useState} from 'react';
-import { getCurrentWeather,
-         getcurrentWeatherCoords, 
-         getWeatherForecast,
-} from './services/weatherAPI';
 
 const API_KEY = 'e68a56b59ab68d4a78751891b7790e6b';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
@@ -15,12 +11,10 @@ export const getCurrentWeather= async (city) => {
             if (response.status === 404) {
                 throw new Error(`${city} not found! Check the spelling and try again later!`)
 
-            } elseif (response.status === 401) {
-                throw new Error('Invalid API keys!')
+            } else if (response.status === 401) {
+                throw new Error('Invalid API keys!');
             } 
-        } else{
-
-        }
+        } 
         const data = await response.json();
         if (!data.dt) {
             data.dt = Math.floor(Date.now()/1000)
@@ -40,13 +34,14 @@ export const getCurrentWeatherByCoords= async (lat, lon) => {
         const response = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`)
         if (!response.ok) {
             if (response.status === 401) {
-                throw new Error(`Invalid API keys!`)
+                throw new Error(`Invalid API keys!`);
 
-            } elseif (response.status === 401) {
-                throw new Error('Invalid API keys!')
+            } else if (response.status === 401) {
+                throw new Error('Invalid API keys!');
+            } else {
+                throw new Error('Weather service temporarily unavailable.');
             } 
-        } else{
-            throw new Error('Weather service temporarily unavailable.')
+        
         }
         const data = await response.json();
         if (!data.dt) {
@@ -69,7 +64,7 @@ export const getCurrentWeatherForecast= async (lat, lon) => {
             if (response.status === 401) {
                 throw new Error(`${city} not found! Check the spelling and try again later!`)
 
-            } elseif (response.status === 401) {
+            } else if (response.status === 401) {
                 throw new Error('Invalid API keys!')
             } 
         } else{
@@ -92,12 +87,10 @@ export const SearchCities= async (lat, lon) => {
             if (response.status === 401) {
                 throw new Error(`Invalid API keys!`)
 
-            } elseif (response.status === 401) {
-                throw new Error('Invalid API keys!')
-            } 
-        } else{
+            } else {
             throw new Error('Weather service temporarily unavailable.')
-        }
+           }
+        } 
         
         const data = await response.json();
         return data.map((city) => ({

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import { getCurrentWeather,
          getcurrentWeatherCoords, 
          getWeatherForecast,
-} from '../services/weatherAPI';
+} from '/services/weatherAPI';
 
 export const useWeather = () => {
     const [currentWeather, setCurrentWeather] = useState(null);
@@ -52,7 +52,7 @@ export const useWeather = () => {
             }
         }, (error) => {
             setError('Unable to retrieve your location.');
-            setLoading(false):
+            setLoading(false)
         }
 
      )
@@ -62,7 +62,7 @@ export const useWeather = () => {
     }
     useEffect(() => {
         fetchWeatherByCity('New york');
-    });
+    }, []);
 
     return{currentWeather, 
             forecast, 

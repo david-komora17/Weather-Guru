@@ -1,8 +1,23 @@
 import React from 'react'
 import {Calendar, Droplets} from 'lucide-react'
+import * as lucideIcons from 'lucide-react';
+import { formatDate, formatTemperature } from '../utils/weatherUtils';
 
-function Forecast() {
-  return (
+function Forecast({ forecast, unit }) {
+const dailyForecast = forecast.list.reduce((acc, item) => { 
+    const date = new Date(item.dt * 1000).toLocaleDateString('en-US');
+    
+    if (!acc[date]) {
+    acc[date] = item;
+    }
+    return acc;
+}, {}); 
+
+
+ const dailyItems = Object.values(dailyForecast).slice(0, 5);
+
+  
+    return (
     <div className='bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8
     shadow-2xl'>
         <div className='flex items-center space-x-3 mb-8'>
@@ -12,37 +27,50 @@ function Forecast() {
             <h2 className='text-2xl font-bold text-white'>5 Day forecast</h2>
         </div>
         <div className='space-y-4'>
-            <div className='flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm rounded-2xl 
+            {dailyItems.map((item, index) => {
+                const iconName = getWeatherIcon(item.weather[0]);
+                const IconComponent = lucideIcons[iconName] || lucideIcons.Cloud;
+                return (
+                    <div className='flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm rounded-2xl 
             hover:bg-white/10 transition-all duration-300 group border border-white-10'>
                 <div className='flex items-center space-x-5 flex-1'>
                     <div className='text-white/90 group-hover:text-white transition-all transform group-hover:scale-110 
                     duration'>
-
+                        <IconComponent size={40} />
                     </div>
                     <div className='flex-1'>
                         <div className='text-white font-semibold text-lg'>
-
+                            {index === 0 ? 'Today' : formatDate(item.dt)}
                         </div>
                         <div className='text-white/70 text-sm capitalize font-medium'>
-                            Weather decription
+                            {item.weather[0].description}
                         </div>
                     </div>
                 </div>
                 <div className='flex items-center space-x-6'>
                     <div className='flex items-center space-x-2 text-white/60'>
                         <Droplets className='w-4 h-4 text-blue-300 '/>
-                        <span className='text-sm font-medium'></span>
+                        <span className='text-sm font-medium'>
+                            {Math.round(item.pop * 100)}%
+                        </span>
                     </div>
 
                     <div className='text-right'>
-                        <div className='text-white font-bold text-xl'>Temperate</div>
-                        <div className='text-white font-bold text-sm font-medium'>Main temp</div>
+                        <div className='text-white font-bold text-xl'>
+                            {formatTemperature(item.main.temp_max, unit)}
+                        </div>
+                        <div className='text-white font-bold text-sm font-medium'>                            
+                            {formatTemperature(item.main.temp_min, unit)} 
+                        </div>
                     </div>
                 </div>
             </div>
+                );
+            })}
         </div>
     </div>
-  )
-}
+  );
+};
 
-export default Forecast
+
+export default Forecast;

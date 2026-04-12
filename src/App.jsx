@@ -5,7 +5,7 @@ import TemperatureToggle from './components/TemperatureToggle.jsx';
 import ErrorMessage from './components/ErrorMessage.jsx';
 import WeatherCard from './components/WeatherCard.jsx';
 import Forecast from './components/Forecast.jsx';
-import { getCurrentWeather } from '../services/WeatherAPI.js';
+import { getCurrentWeather } from './services/WeatherAPI.js';
 import { useWeather } from './hooks/useWeather.js';
 
 function App() {
@@ -13,11 +13,19 @@ function App() {
         forecast, 
         loading, 
         error,
-       unit, 
-       fetchWeatherByCity,
-       fetchWeatherByLocation,
-       toggleUnit
+        unit, 
+        fetchWeatherByCity,
+        fetchWeatherByLocation,
+        toggleUnit
       } = useWeather();
+
+      const handleRetry = () => {
+        if (currentWeather) {
+          fetchWeatherByCity(currentWeather.name);
+        } else {
+          fetchWeatherByCity('New York');
+        }
+      }
   return (
     <div className='min-h-screen relative overflow-hidden'>
       <div className='absolute inset-0 bg-cover bg-center bg-no-repeat' 
@@ -40,7 +48,7 @@ function App() {
 
             <div className='flex flex-col lg:flex-row items-center justify-center space-y-6 lg:space-x-6 mb-12'>
                 <SearchBar onSearch = {fetchWeatherByCity} onLocationSearch = {fetchWeatherByLocation} location = {loading}/>
-               <TemperatureToggle />
+               <TemperatureToggle unit= {unit} onToggle = {toggleUnit}/>
             </div>
           </div>
           <div className='space-y-8'>
@@ -55,17 +63,17 @@ function App() {
             
             {error && !loading && (
               <div className='max-w-2xl mx-auto'>
-                <ErrorMessage/>
+                <ErrorMessage message={error} onRetry={handleRetry}/>
             </div>
             )}
 
             {currentWeather && !loading && (
               <div className='grid grid-cols-1 xl:grid-cols-3 gap-8'>
               <div className='xl:col-span-2 '>
-                <WeatherCard/>
+                <WeatherCard weather = {currentWeather} unit= {unit}/>
               </div>
               <div className='xl:col-span-1'>
-                  {forecast && <WeatherForecast/>}
+                  {forecast && <WeatherForecast forecast={forecast} unit={unit}/>}
               </div>
             </div>
             )}

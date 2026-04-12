@@ -1,6 +1,6 @@
 import { MapPin, X } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { SearchCities } from '../../services/WeatherAPI';
+import { SearchCities } from '../services/WeatherAPI';
 
 function SearchBar(onSearch, onLocationSearch, loading) {
     const [query, setQuery] = useState('');
@@ -104,8 +104,11 @@ function SearchBar(onSearch, onLocationSearch, loading) {
                 suggestion.map((city, index) => {
                     <button className='w-full px-6 py-4 text-left hover:bg-white/10 transition-all duration-200 flex items-center justify-between group border-b
             border-white/10 last:border-b-0 ' key = {`${city.name}- ${city.country}- ${index}`} onClick={() => handleSuggestionsClick(city)}>
-                <div className='font-medium text-white group-hover:text-white/90 '>City name 
-                    <span>,{city.state}</span>
+                <div className='font-medium text-white group-hover:text-white/90 '>
+                {city.name}
+                    {city.state && (
+                        <span className='text-sm text-white/70'>,{city.state}</span> 
+                    )}
                 </div>
                 <div className='text-sm text-white/60'>,{city.Country}</div>
                 <search className='w-4 h-4 text-white/40 group-hover:text-white/60 transition-all'/>
@@ -117,6 +120,6 @@ function SearchBar(onSearch, onLocationSearch, loading) {
         </div>)}
     </div>
   
-}
+};
 
 export default SearchBar
