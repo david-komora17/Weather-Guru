@@ -1,12 +1,16 @@
-import { response } from "express";
+import {useState} from 'react';
+import { getCurrentWeather,
+         getcurrentWeatherCoords, 
+         getWeatherForecast,
+} from './services/weatherAPI';
 
 const API_KEY = 'e68a56b59ab68d4a78751891b7790e6b';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const GEO_URL = 'https://api.openweathermap.org/geo/1.0';
 
 export const getCurrentWeather= async (city) => {
-    try{
-        const response = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`)
+    try {
+        const response = await fetch(`${BASE_URL}/weather?q=${city}&appid=${API_KEY}&units=metric`);
         if (!response.ok) {
             if (response.status === 404) {
                 throw new Error(`${city} not found! Check the spelling and try again later!`)
@@ -42,7 +46,7 @@ export const getCurrentWeatherByCoords= async (lat, lon) => {
                 throw new Error('Invalid API keys!')
             } 
         } else{
-            throw new Error('Weather service teporarily unavailable.')
+            throw new Error('Weather service temporarily unavailable.')
         }
         const data = await response.json();
         if (!data.dt) {
@@ -69,7 +73,7 @@ export const getCurrentWeatherForecast= async (lat, lon) => {
                 throw new Error('Invalid API keys!')
             } 
         } else{
-            throw new Error('Weather service teporarily unavailable.')
+            throw new Error('Weather service temporarily unavailable.')
         }
         return await response.json();
     } 
@@ -92,7 +96,7 @@ export const SearchCities= async (lat, lon) => {
                 throw new Error('Invalid API keys!')
             } 
         } else{
-            throw new Error('Weather service teporarily unavailable.')
+            throw new Error('Weather service temporarily unavailable.')
         }
         
         const data = await response.json();
