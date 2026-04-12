@@ -46,6 +46,9 @@ function App() {
               <div className='xl:col-span-2 '>
                 <WeatherCard/>
               </div>
+              <div className='xl:col-span-1'>
+
+              </div>
             </div>
           </div>
 
