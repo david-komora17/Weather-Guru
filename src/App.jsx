@@ -4,6 +4,7 @@ import LoadingSpinner from './components/LoadingSpinner.jsx';
 import TemperatureToggle from './components/TemperatureToggle.jsx';
 import ErrorMessage from './components/ErrorMessage.jsx';
 import WeatherCard from './components/WeatherCard.jsx';
+import Forecast from './components/Forecast.jsx';
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
                 <WeatherCard/>
               </div>
               <div className='xl:col-span-1'>
-
+                <Forecast/>
               </div>
             </div>
           </div>
