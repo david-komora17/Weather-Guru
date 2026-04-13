@@ -1,4 +1,4 @@
- # SkyCast: Modern Weather Dashboard
+ # Weather guru: Modern Weather Dashboard
 A high-performance, responsive weather application built with React and Tailwind CSS. SkyCast provides real-time meteorological data and a 5-day forecast using the OpenWeather API, featuring a sleek, frosted-glass interface.
 
 ## Key Features
