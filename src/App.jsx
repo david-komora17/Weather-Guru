@@ -41,7 +41,7 @@ function App() {
             <div className='mb-8'>
               <h1 className='text-5xl md:text-7xl font-bold text-white mb-4 drop-shadow-2xl tracking-tight '>
                 Weather
-                <span className='bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>Pro</span>
+                <span className='bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent'>Guru</span>
               </h1>
               <p className="text-white/80 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">Experience weather like never before with the best quality insights and predictions.</p>
             </div>
