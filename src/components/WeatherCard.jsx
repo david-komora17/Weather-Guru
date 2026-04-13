@@ -18,7 +18,7 @@ function WeatherCard({weather, unit}) {
         
            {    icon : Eye,
                 label : 'Visibility',
-                Value :  `${(weather.visibiity/ 1000).toFixed(1)} km `,
+                Value :  `${(weather.visibility / 1000).toFixed(1)} km  `,
                 color : 'text-blue-300'
             },
            {    icon : Wind,
@@ -28,7 +28,7 @@ function WeatherCard({weather, unit}) {
             },
            {    icon : Droplets,
                 label : 'Humidity',
-                Value :  `${weather.main.humdity}%`,
+                Value :  `${weather.main.humidity}%`,
                 color : 'text-cyan-300'
             },
            {    icon : Gauge,
