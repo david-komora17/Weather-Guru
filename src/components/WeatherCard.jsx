@@ -38,7 +38,7 @@ function WeatherCard({weather, unit}) {
             },
            {    icon : Thermometer,
                 label : 'feels like',
-                Value :  `${formatTemperature(weather.main.feels_like, unit)}° ${unit} `,
+                Value :  `${formatTemperature(weather.main.feels_like, unit)}°`,
                 color : 'text-orange-300'
             },
 

@@ -21,7 +21,7 @@ export const getWeatherIcon = (weather) => {
 };
 
 export const formatTemperature = (temp, unit) => {
-    if (unit === 'fahrenheit') {
+    if (unit === 'F') {
         return Math.round((temp * 9)/5 + 32)
     }
     return Math.round(temp);
