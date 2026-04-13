@@ -4,13 +4,13 @@ export const getWeatherIcon = (weather) => {
     const iconMap = {
         Clear:'Sun',
         Clouds:'Cloud',
-        Rain:'Cloudrain',
+        Rain:'CloudRain',
         Drizzle:'CloudDrizzle',
-        Thunderstorm:'cloud lightning',
-        Snow:'Cloud snow',
-        Mist:'Cloud fog',
-        Fog:'Cloud fog',
-        Haze:'Cloud fog',
+        Thunderstorm:'cloudLightning',
+        Snow:'CloudSnow',
+        Mist:'CloudFog',
+        Fog:'CloudFog',
+        Haze:'CloudFog',
         Dust:'wind',
         Sand:'wind',
         Ash:'wind',
@@ -29,16 +29,16 @@ export const formatTemperature = (temp, unit) => {
 }
 
 export const formatTime = (timestamp) => {
-    return new Date(timestamp * 1000).toLocaleDateString('en -us', {
+    return new Date(timestamp * 1000).toLocaleDateString('en-us', {
         hour: '2-digit',
         minute: '2-digit',
         day: '2-digit'
     });
 };
 export const formatDate = (timestamp) => {
-    return new Date(timestamp * 1000).toLocaleDateString('en -us', {
-        hour: 'short',
-        minute: 'short',
+    return new Date(timestamp * 1000).toLocaleDateString('en-us', {
+        weekday: 'short',
+        month: 'short',
         day: 'numeric'
     });
 };

@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import { getCurrentWeather,
-         getcurrentWeatherCoords, 
-         getWeatherForecast,
-} from '/services/weatherAPI';
+         getCurrentWeatherByCoords, 
+         getCurrentWeatherForecast,
+} from '../services/WeatherAPI.js';
 
 export const useWeather = () => {
     const [currentWeather, setCurrentWeather] = useState(null);
@@ -12,22 +12,28 @@ export const useWeather = () => {
     const [unit, setUnits] = useState('C');
 
     const fetchWeatherByCity = async (city) => {
-        setLoading(true);
-        setError(null);
+    setLoading(true);
+    setError(null);
 
-        try {
-            const [weatherData, forecast] = await Promise.all([
-                getCurrentWeather(city),
-                getWeatherForecast(city)
-            ]);
-            setCurrentWeather(weatherData)
-            setForecast(forecast)
+    try {
+            // 1. Matched names to your imports
+            const weatherData = await getCurrentWeather(city);
+            
+            // 2. OpenWeather Forecast usually needs lat/lon
+            const forecastData = await getCurrentWeatherForecast(
+                weatherData.coord.lat, 
+                weatherData.coord.lon
+            );
+
+            setCurrentWeather(weatherData);
+            setForeCast(forecastData); // 3. Matched your state setter 'setForeCast'
         } catch(err) {
-            setError(err instanceof Error ? error.message : "Failed to fetch weather data.")
+            setError(err instanceof Error ? err.message : "Failed to fetch weather data.");
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
+
 
     const fetchWeatherByLocation = () => {
         if(!navigator.geolocation) {
@@ -42,8 +48,8 @@ export const useWeather = () => {
                 const weatherData = await getCurrentWeatherByCoords(latitude, longitude);
                 setCurrentWeather(weatherData)
 
-                const forecastData = await getWeatherForecast(weatherData.name);
-                setForeCast(forecastData)
+                const forecastData = await getCurrentWeatherForecast(weatherData.name);
+                setForecast(forecastData)
             } catch(err){
                 setError(err instanceof Error ? err.message : "Failed to fetch weather data.")
             }

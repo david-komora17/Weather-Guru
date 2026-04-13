@@ -57,40 +57,36 @@ export const getCurrentWeatherByCoords= async (lat, lon) => {
     }
 }
 
-export const getCurrentWeatherForecast= async (lat, lon) => {
-    try{
-        const response = await fetch(`${BASE_URL}/forecast?q=${city}&appid=${API_KEY}&units=metric`)
+export const getCurrentWeatherForecast = async (lat, lon) => {
+    try {
+        // 1. Changed URL from /weather to /forecast
+        const response = await fetch(`${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`);
+        
         if (!response.ok) {
             if (response.status === 401) {
-                throw new Error(`${city} not found! Check the spelling and try again later!`)
-
-            } else if (response.status === 401) {
-                throw new Error('Invalid API keys!')
-            } 
-        } else{
-            throw new Error('Weather service temporarily unavailable.')
+                throw new Error('Invalid API keys!');
+            }
+            // 2. Removed the 'city' variable reference which was causing errors
+            throw new Error('Forecast service unavailable.');
         }
+
+        // 3. REMOVED the 'else { throw error }' block that was breaking successful calls
         return await response.json();
-    } 
-    catch(error) {
+        
+    } catch(error) {
         if(error instanceof TypeError && error.message.includes("fetch")){
             throw new Error('Please check your internet connection and try again!')
         } 
-        throw error
+        throw error;
     }
 }
 
-export const SearchCities= async (lat, lon) => {
+
+export const SearchCities= async (query) => {
     try{
         const response = await fetch(`${GEO_URL}/direct?q=${query}&limit=5&appid=${API_KEY}`)
-        if (!response.ok) {
-            if (response.status === 401) {
-                throw new Error(`Invalid API keys!`)
-
-            } else {
-            throw new Error('Weather service temporarily unavailable.')
-           }
-        } 
+        
+        if (!response.ok) throw new Error('City search unavailable.');
         
         const data = await response.json();
         return data.map((city) => ({
@@ -100,11 +96,7 @@ export const SearchCities= async (lat, lon) => {
             country: city.country,
             state: city.state || ""
         }))
-    } 
-    catch(error) {
-        if(error instanceof TypeError && error.message.includes("fetch")){
-            throw new Error('Please check your internet connection and try again!')
-        } 
+    } catch(error) {
         throw error
     }
 }

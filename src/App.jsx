@@ -73,7 +73,7 @@ function App() {
                 <WeatherCard weather = {currentWeather} unit= {unit}/>
               </div>
               <div className='xl:col-span-1'>
-                  {forecast && <WeatherForecast forecast={forecast} unit={unit}/>}
+                  {forecast && <Forecast forecast={forecast} unit={unit}/>}
               </div>
             </div>
             )}

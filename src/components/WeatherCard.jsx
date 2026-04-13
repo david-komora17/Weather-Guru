@@ -3,7 +3,7 @@ import { MapPin,
         Sunset, 
         Eye, 
         Wind, 
-        Droplet, 
+        Droplets, 
         Gauge, 
         Thermometer, } from 'lucide-react';
 import React from 'react'
@@ -13,7 +13,7 @@ import { formatTemperature, formatTime, getWeatherIcon } from '../utils/weatherU
 function WeatherCard({weather, unit}) {
 
     const iconName = getWeatherIcon(weather)
-    const iconComponent = lucideIcons[iconName] || lucideIcons.Cloud;
+    const IconComponent = lucideIcons[iconName] || lucideIcons.Cloud;
     const weatherStats = [
         
            {    icon : Eye,
@@ -82,7 +82,7 @@ function WeatherCard({weather, unit}) {
             </div>
 
             <div className='text-white/90 transform hover:scale-110 transition-transform duration-300'>
-                <iconComponent size={20} className='drop-shadow-2xl'/>
+                <IconComponent size={20} className='drop-shadow-2xl'/>
             </div>
         </div>
         <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6'>

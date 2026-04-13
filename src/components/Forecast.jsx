@@ -1,7 +1,7 @@
 import React from 'react'
 import {Calendar, Droplets} from 'lucide-react'
 import * as lucideIcons from 'lucide-react';
-import { formatDate, formatTemperature } from '../utils/weatherUtils';
+import { formatDate, formatTemperature, getWeatherIcon } from '../utils/weatherUtils';
 
 function Forecast({ forecast, unit }) {
 const dailyForecast = forecast.list.reduce((acc, item) => { 
@@ -31,7 +31,7 @@ const dailyForecast = forecast.list.reduce((acc, item) => {
                 const iconName = getWeatherIcon(item.weather[0]);
                 const IconComponent = lucideIcons[iconName] || lucideIcons.Cloud;
                 return (
-                    <div className='flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm rounded-2xl 
+                    <div key={item.dt} className='flex items-center justify-between p-5 bg-white/5 backdrop-blur-sm rounded-2xl 
             hover:bg-white/10 transition-all duration-300 group border border-white-10'>
                 <div className='flex items-center space-x-5 flex-1'>
                     <div className='text-white/90 group-hover:text-white transition-all transform group-hover:scale-110 
