@@ -15,7 +15,7 @@ Icons: Lucide React
 API: OpenWeatherMap
 Build Tool: Vite
 ## Project Architecture
-text
+text <br/>
 <code>
 src/
 ├── components/          # UI Components (SearchBar, WeatherCard, Forecast)
@@ -34,26 +34,25 @@ To prevent excessive API calls, the SearchBar uses a setTimeout inside a useEffe
 3. Coordinate-First Accuracy
 The app fetches current weather first to get exact GPS coordinates (lat, lon), which are then used to fetch the hyper-local 5-day forecast.
  ### Installation
-1 **Clone the Repo**
+1 **Clone the Repo**<br/>
 bash
 <code   >
 git clone https://github.com
 Use code with caution.
 </code>
 
-2 **Install Packages**
-bash
+2 **Install Packages**<br/>
 <code>
 npm install
 Use code with caution.
 </code>
 
-3 **Run Development Server**
-bash
+3 **Run Development Server** <br/>
 <code>
+bash
 npm run dev
 Use code with caution.
 </code>
 
 
-* **Developed for educational purposes using React & Tailwind CSS.** *
+* **Developed for educational purposes using React & Tailwind CSS.** 
