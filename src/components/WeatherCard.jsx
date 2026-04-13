@@ -53,8 +53,8 @@ function WeatherCard({weather, unit}) {
                     <MapPin className='w-5 h-5 text-white/80'/>
                 </div>
                 <div className='p-2 bg-white/10 rounded-full'>
-                    <h2 className='text-white font-semibold text-lg'>Weather name</h2>
-                    <p className='text-white/60 text-sm'>Weather country</p>
+                    <h2 className='text-white font-semibold text-lg'>{weather.name}</h2>
+                    <p className='text-white/60 text-sm'>{weather.sys.country}</p>
                 </div>
             </div>
            <div className='text-right'>
@@ -77,7 +77,7 @@ function WeatherCard({weather, unit}) {
                 </div>
                 <div className='flex items-center space-x-4 text-white/60 text-sm '>
                     <span>H:{formatTemperature(weather.main.temp_max, unit)}°</span>
-                    <span>L:{formatTemperature(weather.main.temp_max, unit)}°</span>
+                    <span>L:{formatTemperature(weather.main.temp_min, unit)}°</span>
                 </div>
             </div>
 
